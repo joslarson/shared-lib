@@ -1,0 +1,179 @@
+html { font-size: 62.5%; /*62.5% for pixel-like sizing*/}
+
+body {
+    background: #e6e6e6;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    color: #232323;
+    padding-top: 3rem;
+}
+
+header {
+    background: rgba(0,0,0,.8);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 500;
+}
+
+header .wrapper { 
+    max-width: 96.0rem; 
+    margin: auto; 
+    position: relative; 
+    padding: 1.5rem 2rem; 
+}
+
+header h1 { font-size: 2rem; color: rgba(255,255,255,.9); font-weight: 300; }
+header nav { position: absolute; top: 0; left: 13rem; text-transform: uppercase; }
+header nav a { 
+    display: inline-block; 
+    line-height: 5rem; 
+    font-size: 1.4rem; 
+    color: rgba(255,255,255,.9); 
+    height: 100%; text-decoration: none; 
+    padding: 0 1rem;
+}
+
+body > .wrapper {
+    width: 43.0rem;
+    margin: 4rem auto;
+}
+
+ul.albums {
+    list-style-type: none;
+}
+
+ul.albums li {
+    position: relative;
+}
+
+ul.albums .votes {
+    box-sizing: border-box;
+    height: 12.4rem;
+    width: 4.3rem;
+    position: absolute;
+    left: 0;
+    top: 1.4rem;
+    border: solid 1px rgba(0,0,0,.15);
+    border-right-color: transparent;
+    border-radius: .5rem 0 0 .5rem;
+    z-index: 1;
+    background: rgba(0,0,0,.025);
+}
+
+.votes .upvote, .votes .downvote {
+    display: block;
+    position: absolute;
+    height: 5.5rem;
+    width: 4.3rem;
+    border: none;
+    opacity: .5;
+    outline: none;
+    cursor: pointer;
+}
+
+.votes .upvote[disabled], .votes .downvote[disabled] {
+    opacity: .13;
+    cursor: default;
+}
+
+ul.albums .votes .upvote {
+    background: url(../img/up-arrow.svg) top 1.0rem center no-repeat;
+    top: 0rem;
+}
+
+ul.albums .votes .downvote {
+    background: url(../img/down-arrow.svg) bottom 1.0rem center no-repeat;
+    bottom: 0rem;
+}
+
+ul.albums .votes .count {
+    pointer-events: none;
+    font-size: 3.0rem;
+    font-weight: 700;
+    color: #747474;
+    display: block;
+    text-align: center;
+    line-height: 3.0rem;
+    width: 4.3rem;
+    position: absolute;
+    top: 50%;
+    margin-top: -1.6rem;
+}
+
+ul.albums .card {
+    box-sizing: border-box;
+    background: white;
+    padding: 1.0rem 1.2rem 0 16.2rem;
+    margin: 0 0 1.0rem 4.3rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.1rem 0.2rem rgba(0,0,0,.3);
+    background-size: 15.0rem;
+    background-repeat: no-repeat;
+    height: 15.0rem;
+    width: 38.7rem;
+    position: relative;
+    z-index: 10;
+}
+
+ul.albums .card h3 {
+    font-size: 2.0rem;
+    font-weight: 300;
+    margin-bottom: 0.2rem;
+}
+
+ul.albums .card .artist { 
+    display: block; 
+    font-size: 1.5rem; 
+    font-weight: 300; 
+    color: #939393; 
+    margin-bottom: 1.4rem;
+}
+
+ul.albums .card .year {
+    display: inline-block;
+    font-size: 1.7rem;
+    font-weight: 500; 
+    color: white; 
+    background: #d1d1d1; 
+    border-radius: 0.3rem;
+    padding: 0.1rem 0.4rem;
+    margin-bottom: 1.3rem;
+}
+
+ul.albums .card .suggester { 
+    display: block; 
+    font-size: 1.2rem; 
+    font-weight: 300; 
+    font-style: italic;
+    color: #939393; 
+    margin-bottom: 1.0rem;
+}
+
+ul.albums .actions {
+    border-top: solid 1px rgba(0,0,0,.075);
+    margin: 0 -1.2rem;
+}
+
+ul.albums .actions a {
+    text-align: center;
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #069fe6;
+    text-decoration: none;
+    line-height: 3.4rem;
+}
+
+ul.albums .actions a:first-child {border-right: solid 1px rgba(0,0,0,.075); width: 63%;}
+ul.albums .actions a:last-child { width: 35%; }
+
+ul.albums .actions a:hover {
+    font-weight: 400;
+    font-size: 1.45rem;
+}
+
+/* Toast Message */
+/* --------------------------------------------------- */
+
+#toast                          { background: rgba(0,0,0,.75); font-size: 1.6rem; color: rgba(255,255,255,.8); width: 30rem; padding: 2rem; text-align: center; border-radius: .5rem; pointer-events: none; position: fixed; left: 50%; margin-left: -16rem; top: 9rem; z-index: 1000; opacity: 0; transition: opacity .7s; }
+#toast.active                   { opacity: 1; }

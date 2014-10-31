@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<ul class="albums">
+{% for suggestion in suggested %}
+<li>
+    <div class="votes">
+        <form action="/album/{{suggestion.pk}}/vote/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="increment">
+            <button type="submit" class="upvote" {% if suggestion.pk in user_votes %}disabled{% endif %}></button>
+        </form>
+        <span class="count">{{suggestion.vote_count}}</span>
+        <form action="/album/{{suggestion.pk}}/vote/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="decrement">
+            <button type="submit" class="downvote" {% if suggestion.pk not in user_votes %}disabled{% endif %}></button>
+        </form>
+    </div>
+    <div class="card" style="background-image: url({{suggestion.image_url}});">
+        <h3>{{suggestion.title}}</h3>
+        <span class="artist">{{suggestion.artist}}</span>
+        <span class="year">{{suggestion.year}}</span>
+        <span class="suggester">Suggested by {{suggestion.suggester.first_name}}</span>
+        <div class="actions">
+            <a href="/claim/{{suggestion.pk}}">+ Claim this Album</a>
+            <a href="{{suggestion.external_link}}" target="_blank">Listen →</a>
+        </div>
+    </div>
+</li>
+{% empty %}
+<li>None available.</li>
+{% endfor %}
+</ul>
+{% endblock %} 
