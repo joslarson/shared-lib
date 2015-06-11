@@ -1,0 +1,34 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<ul class="albums">
+{% for album in shared_albums %}
+<li>
+    <div class="votes">
+        <form action="/album/{{album.pk}}/vote/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="increment">
+            <button type="submit" class="upvote" {% if album.pk in user_votes %}disabled{% endif %}></button>
+        </form>
+        <span class="count">{{album.vote_count}}</span>
+        <form action="/album/{{album.pk}}/vote/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="decrement">
+            <button type="submit" class="downvote" {% if album.pk not in user_votes %}disabled{% endif %}></button>
+        </form>
+    </div>
+    <div class="card" style="background-image: url({{album.image_url}});">
+        <h3>{{album.title}}</h3>
+        <span class="artist">{{album.artist}}</span>
+        <span class="year">{{album.year}}</span>{% if album.is_explicit %}<span class="explicit">Explicit</span>{% endif %}
+        <span class="sharer">Shared by {{album.sharer.first_name}}</span>
+        <div class="actions">
+            <a href="/claim/{{album.pk}}">+ Claim this Album</a><a href="{{album.external_link}}" target="_blank">Listen →</a>
+        </div>
+    </div>
+</li>
+{% empty %}
+<li>None available.</li>
+{% endfor %}
+</ul>
+{% endblock %} 

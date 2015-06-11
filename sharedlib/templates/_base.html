@@ -14,18 +14,30 @@
     <div class="wrapper">
         <h1>Shared Lib</h1>
         <nav>
-            <a href="/">Suggested</a>
-            <a href="/purchased/">Purchased</a>
+            <a {% if page == 'inbox' %}class="active"{% endif %} href="/">Inbox</a>
+            <a {% if page == 'library' %}class="active"{% endif %} href="/library/">Library</a>
+            <a href="#add">+ Add</a>
         </nav>
     </div>
 </header>
 <div class="wrapper">
 {% block content %}{% endblock %}
-<div class="sidebar">
-{% block sidebar %}
-
-{% endblock %}
+    <div class="sidebar">
+    {% block sidebar %}
+    <ol>
+        {% for user in ranked_users %}
+        <li>{{user.get_short_name}} {{user.score}}</li>
+        {% endfor %}
+    </ol>
+    {% endblock %}
+    </div>
 </div>
+<div id='album_finder'>
+    <button class='close'>x</button>
+    <form class="search-box" method="get" action="/api/album_search.json">
+        <input type='text' name='album' placeholder='type search + enter'/>
+    </form>
+    <ul class="results"></ul>
 </div>
 <div id="toast"></div>
 </body>
